@@ -1,0 +1,6 @@
+.dev/*
+.conf/*
+.bin
+.media/*
+*.pyc
+env/
