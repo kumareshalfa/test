@@ -31,7 +31,7 @@ class BlogSpider(scrapy.Spider):
 		href = response.url		
 		for news in response.css('.More_News_titles'):
 			next_page = news.css('a::attr("href")').extract_first()
-			par = urlparse.parse_qs(urlparse.urlparse(url).query)
+			par = urlparse.parse_qs(urlparse.urlparse(next_page).query)
 			news_id = (par['a_id'][0])
 			print(news_id)
 			if next_page:
@@ -45,8 +45,9 @@ class BlogSpider(scrapy.Spider):
 		details = response.css('.article_content_title ::text').extract()
 		article_title = response.css('.article_title ::text').extract_first()
 		date = response.css('.Main_article_date ::text').extract_first()
-		
-		print(details)
+		for de in details:
+			print(de)
+		# print(details)
 		print(article_title)
 		print(date)
-		yield {"details":json.dumps(details,ensure_ascii=False).encode('utf8'),"href":href,"article_title":article_title,"date":date}
+		# yield {"details":json.dumps(details,ensure_ascii=False).encode('utf8'),"href":href,"article_title":article_title,"date":date}
